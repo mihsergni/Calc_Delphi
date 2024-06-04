@@ -1,0 +1,260 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
+    Button7: TButton;
+    Button8: TButton;
+    Button9: TButton;
+    Button10: TButton;
+    Button11: TButton;
+    Button12: TButton;
+    Button13: TButton;
+    Button14: TButton;
+    Button15: TButton;
+    Button16: TButton;
+    Button17: TButton;
+    Button18: TButton;
+    Button19: TButton;
+    Button20: TButton;
+    Button21: TButton;
+    Button22: TButton;
+    Button23: TButton;
+    Button24: TButton;
+    Edit1: TEdit;
+    Label1: TLabel;
+    Button25: TButton;
+    Button26: TButton;
+    Button27: TButton;
+    Button28: TButton;
+    Button29: TButton;
+    Button30: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure Button16Click(Sender: TObject);
+    procedure Button12Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button20Click(Sender: TObject);
+    procedure Button21Click(Sender: TObject);
+    procedure Button23Click(Sender: TObject);
+    procedure Button24Click(Sender: TObject);
+    procedure Button25Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    chislo, pamyat : real;
+    flag, oper : integer;
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button12Click(Sender: TObject);
+var s_f : real;
+begin
+oper :=3;
+flag := 1;
+s_f := StrToFloatDef(Edit1.Text, 0);
+chislo := s_f;
+
+Label1.Caption:=Edit1.Text + ' * ';
+
+end;
+
+procedure TForm1.Button16Click(Sender: TObject);
+var s_f : real;
+begin
+oper :=2;
+flag := 1;
+s_f := StrToFloatDef(Edit1.Text, 0);
+chislo := s_f;
+Label1.Caption:=Edit1.Text + ' - ';
+
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var s_f : real;
+begin
+s_f := StrToFloatDef(Edit1.Text, 0);
+
+case oper of
+1 : Edit1.Text:=FloatToStr(chislo * s_f  / 100);
+2 : Edit1.Text:=FloatToStr(chislo *  s_f / 100);
+3 : Edit1.Text:=FloatToStr(s_f  / 100);
+4 : Edit1.Text:=FloatToStr(chislo *  s_f / 100);
+end;
+
+end;
+
+procedure TForm1.Button20Click(Sender: TObject);
+var s_f : real;
+begin
+oper := 1;
+flag := 1;
+s_f := StrToFloatDef(Edit1.Text, 0);
+chislo := s_f;
+Label1.Caption:=Edit1.Text + ' + ';
+
+end;
+
+procedure TForm1.Button21Click(Sender: TObject);
+var s_f : real;
+begin
+s_f := StrToFloatDef(Edit1.Text, 0);
+
+Edit1.Text:= FloatToStr(s_f * -1);
+
+end;
+
+procedure TForm1.Button23Click(Sender: TObject);
+var s : string;
+begin
+s := Edit1.Text;
+if (Pos(',', s) > 0) or (Length(s) = 0)  then exit;
+
+  Edit1.Text := s + ',';
+
+end;
+
+procedure TForm1.Button24Click(Sender: TObject);
+var s_f : real;
+begin
+
+s_f := StrToFloatDef(Edit1.Text, 0);
+
+if (s_f = 0) and (oper = 4) then
+begin
+ShowMessage('На ноль делить нельзя!');
+exit;
+end;
+
+Label1.Caption:=Label1.Caption + Edit1.Text;
+
+case oper of
+1 : Edit1.Text:=FloatToStr(s_f + chislo);
+2 : Edit1.Text:=FloatToStr(chislo - s_f);
+3 : Edit1.Text:=FloatToStr(chislo * s_f);
+4 : Edit1.Text:=FloatToStr(chislo / s_f);
+end;
+
+flag:=1;
+
+end;
+
+procedure TForm1.Button25Click(Sender: TObject);
+var capt : string;
+begin
+
+capt := (Sender as TButton).Caption;
+
+if capt = 'MC' then pamyat := 0;
+
+if capt = 'MR' then Edit1.Text := FloatToStr(pamyat);
+
+if capt = 'M+' then  pamyat := pamyat + StrToFloatDef(Edit1.Text, 0);
+
+if capt = 'M-' then  pamyat := pamyat - StrToFloatDef(Edit1.Text, 0);
+
+if capt = 'MS' then pamyat := StrToFloatDef(Edit1.Text, 0);
+
+if capt = 'ShowM' then  ShowMessage(FloatToStr(pamyat));
+
+
+if pamyat <> 0 then
+begin
+Button25.Font.Style:=[fsBold];
+Button26.Font.Style:=[fsBold];
+Button27.Font.Style:=[fsBold];
+Button28.Font.Style:=[fsBold];
+Button29.Font.Style:=[fsBold];
+Button30.Font.Style:=[fsBold];
+end else
+begin
+  Button25.Font.Style:=[];
+  Button26.Font.Style:=[];
+  Button27.Font.Style:=[];
+  Button28.Font.Style:=[];
+  Button29.Font.Style:=[];
+  Button30.Font.Style:=[];
+end;
+
+
+
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  Edit1.Text:= '0';
+  Label1.Caption:='';
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  Edit1.Text:= '0';
+  Label1.Caption:='';
+  oper := 0;
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+var s : string;
+begin
+s :=   Edit1.Text;
+Delete(s, length(s), 1);
+Edit1.Text:=s;
+
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+var s_f : real;
+begin
+
+s_f := StrToFloatDef(Edit1.Text, 0);
+
+if s_f = 0 then
+begin
+ShowMessage('На ноль делить нельзя!');
+exit;
+end;
+
+
+Edit1.Text:=FloatToStr(1/s_f);
+end;
+
+procedure TForm1.Button9Click(Sender: TObject);
+var s_f : real;
+begin
+
+if flag <> 0 then begin Edit1.Text:= '';flag := 0;end;
+
+if (Edit1.Text = '0') and ((Sender as TButton).Caption <> ',') then Edit1.Text:= '';
+Edit1.Text := Edit1.Text + (Sender as TButton).Caption;
+
+
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+flag := 0;
+end;
+
+end.
