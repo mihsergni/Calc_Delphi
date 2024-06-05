@@ -10,13 +10,9 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  KeyPreview = True
   OldCreateOrder = False
   Position = poDesktopCenter
-  OnActivate = FormActivate
   OnCreate = FormCreate
-  OnKeyPress = FormKeyPress
-  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -426,18 +422,13 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 24
-    Text = '0'
-    OnKeyPress = Edit1KeyPress
   end
   object Button25: TButton
     Left = 4
     Top = 75
     Width = 55
     Height = 25
-    Hint = '<Ctrl>+ Delete'
     Caption = 'MC'
-    ParentShowHint = False
-    ShowHint = True
     TabOrder = 25
     OnClick = Button25Click
   end
@@ -446,10 +437,7 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
-    Hint = '<Ctrl> "."'
     Caption = 'Memo'
-    ParentShowHint = False
-    ShowHint = True
     TabOrder = 26
     OnClick = Button25Click
   end
@@ -458,10 +446,7 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
-    Hint = '<Ctrl>'#1089#1090#1088#1077#1083#1082#1072' '#1074#1085#1080#1079
     Caption = 'MR'
-    ParentShowHint = False
-    ShowHint = True
     TabOrder = 27
     OnClick = Button25Click
   end
@@ -470,10 +455,7 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
-    Hint = '<Ctrl> "+"'
     Caption = 'M+'
-    ParentShowHint = False
-    ShowHint = True
     TabOrder = 28
     OnClick = Button25Click
   end
@@ -482,10 +464,7 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
-    Hint = '<Ctrl> "-"'
     Caption = 'M-'
-    ParentShowHint = False
-    ShowHint = True
     TabOrder = 29
     OnClick = Button25Click
   end
@@ -494,10 +473,7 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
-    Hint = '<Ctrl>+ '#1089#1090#1088#1077#1083#1082#1072' '#1074#1074#1077#1088#1093
     Caption = 'MS'
-    ParentShowHint = False
-    ShowHint = True
     TabOrder = 30
     OnClick = Button25Click
   end

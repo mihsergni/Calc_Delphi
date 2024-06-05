@@ -147,16 +147,7 @@ end;
 
 procedure TForm1.Button24Click(Sender: TObject);
 var s_f : real;
-st : string;
 begin
-
-st:= Edit1.Text;
-
-if Poisk(st) then
-begin // Обработка арифметического выражения
-//ShowMessage('eee');
-end;
-
 
 
 s_f := StrToFloatDef(Edit1.Text, 0);
@@ -303,17 +294,14 @@ begin
 if flag <> 0 then begin Edit1.Text:= '';flag := 0;end;
 
 if (Edit1.Text = '0') and ((Sender as TButton).Caption <> ',') then Edit1.Text:= '';
-
 Edit1.Text := Edit1.Text + (Sender as TButton).Caption;
+
 
 end;
 
 procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
 begin
-//ShowMessage(Key);
-
   if not (key in ['1','2','3','4','5','6','7','8','9','0','+','-','*','/',#8]) then Key :=Chr(0);
-
 end;
 
 procedure TForm1.FormActivate(Sender: TObject);
@@ -352,9 +340,6 @@ end;
 
 procedure TForm1.FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-ShowMessage(IntToStr(key));
-
-if (Key = 13) then Button24.SetFocus;
 if (Key = 102) and (ssCtrl in Shift) then Button7.Click;   //6
 if (Key = 101) and (ssCtrl in Shift) then Button6.Click;   //5
 if (Key = 100) and (ssCtrl in Shift) then Button5.Click;   //4
@@ -362,13 +347,6 @@ if (Key = 103) and (ssCtrl in Shift) then Button1.Click;   //7
 if (Key = 104) and (ssCtrl in Shift) then Button2.Click;   //8
 if (Key = 105) and (ssCtrl in Shift) then Button3.Click;   //9
 if (Key = 97) and (ssCtrl in Shift) then Button21.Click;   //1
-if (Key = 38) and (ssCtrl in Shift) then Button30.Click;   //MS
-if (Key = 40) and (ssCtrl in Shift) then Button27.Click;   //MR
-if (Key = 107) and (ssCtrl in Shift) then Button28.Click;   //M+
-if (Key = 109) and (ssCtrl in Shift) then Button29.Click;   //M-
-if (Key = 110) and (ssCtrl in Shift) then Button26.Click;   //Memo
-if (Key = 46) and (ssCtrl in Shift) then Button25.Click;   //Memo
-
 end;
 
 
