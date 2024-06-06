@@ -10,9 +10,13 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnActivate = FormActivate
   OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -31,6 +35,7 @@ object Form1: TForm1
     Top = 106
     Width = 88
     Height = 40
+    Hint = '<Ctrl>+7'
     Caption = '%'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -38,6 +43,8 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 0
     OnClick = Button1Click
   end
@@ -46,6 +53,7 @@ object Form1: TForm1
     Top = 106
     Width = 88
     Height = 40
+    Hint = '<Ctrl>+8'
     Caption = 'CE'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -53,6 +61,8 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
     OnClick = Button2Click
   end
@@ -61,6 +71,7 @@ object Form1: TForm1
     Top = 106
     Width = 88
     Height = 40
+    Hint = '<Ctrl>+9'
     Caption = 'C'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -68,6 +79,8 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 2
     OnClick = Button3Click
   end
@@ -91,6 +104,7 @@ object Form1: TForm1
     Top = 152
     Width = 88
     Height = 40
+    Hint = '<Ctrl>+4'
     Caption = '1/x'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -98,6 +112,8 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 4
     OnClick = Button5Click
   end
@@ -106,6 +122,7 @@ object Form1: TForm1
     Top = 152
     Width = 88
     Height = 40
+    Hint = '<Ctrl>+5'
     Caption = 'X2'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -113,6 +130,8 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 5
     OnClick = Button6Click
   end
@@ -121,6 +140,7 @@ object Form1: TForm1
     Top = 152
     Width = 88
     Height = 40
+    Hint = '<Ctrl>+6'
     Caption = 'Sqrt'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -128,6 +148,8 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 6
     OnClick = Button7Click
   end
@@ -331,6 +353,7 @@ object Form1: TForm1
     Top = 334
     Width = 88
     Height = 40
+    Hint = '<Ctrl>+1'
     Caption = '+/-'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -338,6 +361,8 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 20
     OnClick = Button21Click
   end
@@ -401,13 +426,19 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 24
+    Text = '0'
+    OnEnter = Edit1Enter
+    OnKeyPress = Edit1KeyPress
   end
   object Button25: TButton
     Left = 4
     Top = 75
     Width = 55
     Height = 25
+    Hint = '<Ctrl>+ Delete'
     Caption = 'MC'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 25
     OnClick = Button25Click
   end
@@ -416,7 +447,10 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
+    Hint = '<Ctrl> "."'
     Caption = 'Memo'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 26
     OnClick = Button25Click
   end
@@ -425,7 +459,10 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
+    Hint = '<Ctrl>'#1089#1090#1088#1077#1083#1082#1072' '#1074#1085#1080#1079
     Caption = 'MR'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 27
     OnClick = Button25Click
   end
@@ -434,7 +471,10 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
+    Hint = '<Ctrl> "+"'
     Caption = 'M+'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 28
     OnClick = Button25Click
   end
@@ -443,7 +483,10 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
+    Hint = '<Ctrl> "-"'
     Caption = 'M-'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 29
     OnClick = Button25Click
   end
@@ -452,7 +495,10 @@ object Form1: TForm1
     Top = 75
     Width = 55
     Height = 25
+    Hint = '<Ctrl>+ '#1089#1090#1088#1077#1083#1082#1072' '#1074#1074#1077#1088#1093
     Caption = 'MS'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 30
     OnClick = Button25Click
   end
