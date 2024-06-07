@@ -62,6 +62,9 @@ type
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure FormActivate(Sender: TObject);
     function Poisk(sss: string): boolean;
+    function Calc_expr(MyExpr : string): string;
+    procedure Edit1Enter(Sender: TObject);
+  private
 
   private
     { Private declarations }
@@ -153,21 +156,21 @@ begin
 st:= Edit1.Text;
 
 if Poisk(st) then
-begin // ��������� ��������������� ���������
+begin // Обработка арифметического выражения
+
+Edit1.Text := Calc_expr(st);
 //ShowMessage('eee');
 end;
-
-
 
 s_f := StrToFloatDef(Edit1.Text, 0);
 
 if (s_f = 0) and (oper = 4) then
 begin
-ShowMessage('�� ���� ������ ������!');
+ShowMessage('На ноль делить нельзя!');
 exit;
 end;
 
-Label1.Caption:=Label1.Caption + Edit1.Text;
+Label1.Caption:=Edit1.Text;
 
 case oper of
 1 : Edit1.Text:=FloatToStr(s_f + chislo);
@@ -251,7 +254,7 @@ s_f := StrToFloatDef(Edit1.Text, 0);
 
 if s_f = 0 then
 begin
-ShowMessage('�� ���� ������ ������!');
+ShowMessage('На ноль делить нельзя!');
 exit;
 end;
 
@@ -277,7 +280,7 @@ s_f := StrToFloatDef(Edit1.Text, 0);
 
 if s_f < 0 then
 begin
-ShowMessage('������ ������� ������ �� �������������� �����!');
+ShowMessage('Нельзя извлечь корень из отрицательного числа!');
 exit;
 end;
 
@@ -308,10 +311,170 @@ Edit1.Text := Edit1.Text + (Sender as TButton).Caption;
 
 end;
 
+function TForm1.Calc_expr(MyExpr: string): string;
+var ch, op :TStringList;
+   Rez, ss : string;
+   j, fl, i : integer;
+
+  function Poisk(sss: string): boolean;
+   var
+     r: boolean;
+     i, Pos: Integer;
+   begin
+
+     for i:=1 to Length(sss) do
+     begin
+       if ss[i] = '.' then ss[i] := ',';
+       if sss[i] in ['+','-','/','*'] then begin r := true;break;end
+       else r := false;
+     end;
+
+     Result := r;
+   end;
+begin
+
+  ch:= TStringList.Create;
+  op:= TStringList.Create;
+
+  ss := Trim(MyExpr);
+
+    // Удаление пробелов
+  j:=-1;
+  while j <> 0 do
+  begin
+   j:= Pos(' ', ss);
+   if j > 0 then
+    begin
+     Delete(ss, j, 1);
+    end;
+  end;
+
+  // Проверка на запрещенные символы
+  for i:=1 to Length(ss) do
+  begin
+    if not (ss[i] in ['0'..'9', '.', ',','+','-','/','*']) then
+    begin
+      ShowMessage('В строке есть запрещённые символы!');
+      exit;
+    end;
+  end;
+
+
+  //Разбивка выражения по операциям
+  while  Poisk(ss) do
+    begin
+  for i:=1 to Length(ss) do
+  begin
+
+  if ss[i] = '.' then ss[i] := ',';
+  if not (ss[i] in ['0'..'9', '.', ',']) then
+  begin
+    op.Add(ss[i]);
+    ch.Add(Copy(ss,1,i-1));
+    delete(ss,1,i);
+    if not Poisk(ss) then
+    begin
+       ch.Add(ss);
+       op.Add('@');
+    end;
+    break;
+//    ShowMessage(ss);
+  end;
+  end;
+  end;
+
+
+  // Выполнение операций умножения и деления
+  for i:=0 to op.Count-1 do
+  begin
+
+  if (op.Strings[i] = '*') then
+  begin
+  try
+  ch[i+1] := FloatToStr(StrToFloat(ch[i+1]) * StrToFloat(ch[i]));
+  except
+  ShowMessage('В выражении содержится неверное вещественное число!');
+  exit;
+  end;
+  ch[i] := '#';op[i] := '#';
+  end;
+  if (op.Strings[i] = '/') then
+  begin
+  try
+  ch[i+1] := FloatToStr(StrToFloat(ch[i]) / StrToFloat(ch[i+1]));
+  except
+  ShowMessage('В выражении содержится неверное вещественное число!');
+  exit;
+  end;
+  ch[i] := '#';op[i] := '#';
+  end;
+  end;
+
+  fl:=0;
+  while fl <> 1 do
+  begin
+  i:=0;
+  repeat
+  begin
+   if ch[i] = '#' then
+   begin
+     ch.Delete(i);op.Delete(i); fl:=0;break;
+   end;
+   if op[i] <> '@' then
+   Inc(i);
+   fl := 1;
+  end;
+  until  op[i] = '@'
+  end;
+
+
+//  ShowMessage('');
+
+
+// Выполнение операций сложения и вычитания
+  for i:=0 to op.Count-1 do
+  begin
+
+  if (op.Strings[i] = '+') then
+  begin
+  try
+  ch[i+1] := FloatToStr(StrToFloat(ch[i+1]) + StrToFloat(ch[i]));
+  except
+    ShowMessage('В выражении содержится неверное вещественное число!');
+  exit;
+  end;
+  ch[i] := '#';op[i] := '#';
+  end;
+  if (op.Strings[i] = '-') then
+  begin
+  try
+  ch[i+1] := FloatToStr(StrToFloat(ch[i]) - StrToFloat(ch[i+1]));
+  except
+    ShowMessage('В выражении содержится неверное вещественное число!');
+  exit;
+  end;
+  ch[i] := '#';op[i] := '#';
+  end;
+  end;
+
+  Rez := ch[ch.Count-1];
+
+  Result :=   Rez;
+//  ShowMessage('Результат: ' + Rez);
+
+  ch.Free;op.free;
+//
+end;
+
+procedure TForm1.Edit1Enter(Sender: TObject);
+begin
+if Trim(Edit1.Text) = '0' then Edit1.Text:='';
+
+end;
+
 procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
 begin
 //ShowMessage(Key);
-
   if not (key in ['1','2','3','4','5','6','7','8','9','0','+','-','*','/',#8]) then Key :=Chr(0);
 
 end;
@@ -352,7 +515,7 @@ end;
 
 procedure TForm1.FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-ShowMessage(IntToStr(key));
+//ShowMessage(IntToStr(key));
 
 if (Key = 13) then Button24.SetFocus;
 if (Key = 102) and (ssCtrl in Shift) then Button7.Click;   //6
@@ -386,6 +549,8 @@ begin
 
  Result := r;
 end;
+
+
 
 
 

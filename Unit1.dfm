@@ -427,6 +427,7 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 24
     Text = '0'
+    OnEnter = Edit1Enter
     OnKeyPress = Edit1KeyPress
   end
   object Button25: TButton
