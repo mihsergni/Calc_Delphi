@@ -1,4 +1,4 @@
-﻿unit Unit1;
+unit Unit1;
 
 interface
 
@@ -475,7 +475,7 @@ end;
 procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
 begin
 //ShowMessage(Key);
-  if not (key in ['1','2','3','4','5','6','7','8','9','0','+','-','*','.',',','/',#8]) then Key :=Chr(0);
+  if not (key in ['1','2','3','4','5','6','7','8','9','0','+','-','*','/',#8]) then Key :=Chr(0);
 
 end;
 
