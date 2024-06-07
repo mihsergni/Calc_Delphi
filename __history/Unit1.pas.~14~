@@ -142,7 +142,7 @@ procedure TForm1.Button23Click(Sender: TObject);
 var s : string;
 begin
 s := Edit1.Text;
-if (Length(s) = 0)  then exit;
+if (Pos(',', s) > 0) or (Length(s) = 0)  then exit;
 
   Edit1.Text := s + ',';
 
