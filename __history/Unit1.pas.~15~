@@ -315,6 +315,22 @@ function TForm1.Calc_expr(MyExpr: string): string;
 var ch, op :TStringList;
    Rez, ss : string;
    j, fl, i : integer;
+
+  function Poisk(sss: string): boolean;
+   var
+     r: boolean;
+     i, Pos: Integer;
+   begin
+
+     for i:=1 to Length(sss) do
+     begin
+       if ss[i] = '.' then ss[i] := ',';
+       if sss[i] in ['+','-','/','*'] then begin r := true;break;end
+       else r := false;
+     end;
+
+     Result := r;
+   end;
 begin
 
   ch:= TStringList.Create;
